@@ -1,0 +1,67 @@
+﻿@model  IEnumerable<dotnetversions.Models.DotnetVersion> 
+
+@{
+    ViewData["Title"] = "Dotnet Versions";
+}
+<h2>@ViewData["Title"].</h2>
+
+
+@foreach(var version in Model)
+{
+    <div class="row">
+        <div class="col-md-1">
+        @if(version.Install == "")
+        {
+            @string.Concat(version.VersionKeyName, "  " , version.Name )
+
+        }
+        else
+        {
+            if (version.ServicePack != "" && version.Install == "1")
+            {
+                @string.Concat(version.VersionKeyName, "  ", version.Name, "  SP", version.ServicePack)
+
+            }
+
+        }
+        </div>
+       
+
+        @if (version.SubVersions != null)
+        {
+            <div class="col-md-2">
+                @foreach (var subVersion in version.SubVersions)
+                {
+
+                <div class="row">
+                    @if (subVersion.Install == "")
+                    {
+                        @string.Concat(version.VersionKeyName, "  ", subVersion.Name)
+
+                    }
+                    else
+                    {
+                        if (subVersion.ServicePack != "" && subVersion.Install == "1")
+                        {
+                            @string.Concat(subVersion.VersionKeyName, "  ", subVersion.Name, "  SP", subVersion.ServicePack)
+
+                        }
+                        else if (subVersion.Install == "1")
+
+                        {
+                            @string.Concat(subVersion.VersionKeyName, "  ", subVersion.Name)
+                        }
+
+                    }
+
+                </div>
+
+                }
+                </div>
+
+                }
+
+
+            </div>
+
+        }
